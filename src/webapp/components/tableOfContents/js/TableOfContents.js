@@ -172,5 +172,65 @@ var fluid_1_4 = fluid_1_4 || {};
         templateUrl: "../html/TableOfContents.html",
         levels: ["H1", "H2", "H3", "H4", "H5", "H6"]
     });
+    
+    /************
+    * ToC Level *
+    *************/
+    
+    fluid.registerNamespace("fluid.tableOfContents.level");
+    
+    fluid.tableOfContents.level.finalInit = function (that) {
+        fluid.fetchResources(that.options.resources, function () {
+            that.container.append(that.options.resources.template.resourceText);
+            that.refreshView();
+        });        
+    };
+    
+    fluid.tableOfContents.level.buildTree = function (that) {
+        return {
+            expander: {
+                type: "fluid.renderer.repeat",
+                repeatID: "headingContainer",
+                controlledBy: "headings",
+                valueAs: "headingLevel",
+                pathAs: "headingLevelPath",
+                tree: {
+                    headingText: {
+                        target: "${{headingLevelPath}.text}",
+                        linktext: "${{headingLevelPath}.url}"
+                    }
+                }
+            }
+        };
+    };
+    
+    fluid.tableOfContents.level.produceTree = function (that) {
+        return that.model ? fluid.tableOfContents.level.buildTree(that) : {};
+    };
+    
+    fluid.defaults("fluid.tableOfContents.level", {
+        gradeNames: ["fluid.rendererComponent", "autoInit"],
+        finalInitFunction: "fluid.tableOfContents.level.finalInit",
+        produceTree: "fluid.tableOfContents.level.produceTree",
+        repeatingSelectors: ["headingContainer"],
+        selectorsToIgnore: "headingLevel",
+        selectors: {
+            headingLevel: ".flc-tocLevel-headingLevel",
+            headingContainer: ".flc-tocLevel-headingContainer",
+            headingText: ".flc-tocLevel-headingText"
+        },
+        events: {
+            afterRender: null
+        },
+        model: {
+            headings: [] //[{text: "heading", url: "pathToAnchor", headings: [objects taking the same form, representing subheadings]}]
+        }, 
+        resources: {
+            template: {
+                forceCache: true,
+                url: "../html/tocTemplate.html"
+            }
+        }
+    });
 
 })(jQuery, fluid_1_4);
