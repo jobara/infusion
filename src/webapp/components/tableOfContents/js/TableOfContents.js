@@ -195,10 +195,31 @@ var fluid_1_4 = fluid_1_4 || {};
                 valueAs: "headingLevel",
                 pathAs: "headingLevelPath",
                 tree: {
-                    headingText: {
-                        target: "${{headingLevelPath}.text}",
-                        linktext: "${{headingLevelPath}.url}"
-                    }
+                    expander: [
+                        {
+                            type: "fluid.renderer.condition",
+                            condition: "{headingLevel}.text",
+                            trueTree: {
+                                headingText: {
+                                    target: "${{headingLevelPath}.text}",
+                                    linktext: "${{headingLevelPath}.url}"
+                                }
+                            }
+                        },
+                        {
+                            type: "fluid.renderer.condition",
+                            condition: "{headingLevel}.headings",
+                            trueTree: {
+                                decorators: {
+                                    type: "fluid",
+                                    func: "fluid.tableOfContents.level",
+                                    options: {
+                                        model: "{headingLevel}"
+                                    }
+                                }
+                            }
+                        }
+                    ]
                 }
             }
         };
