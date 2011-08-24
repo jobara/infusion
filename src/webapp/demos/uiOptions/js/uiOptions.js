@@ -122,4 +122,22 @@ var demo = demo || {};
         });
     };
     
+    
+    // Mouse tracking and output logic.
+    
+    var mouseLog = function (event) {
+        console.log(event.type + ":\nCo-or: (" + event.pageX +"," + event.pageY +")\nTarget: " + event.target + "\nTime: " + event.timeStamp);
+    };
+    
+    $(document).ready(function () {
+        var bdy = $("html");
+        
+        bdy.click(function (e) {
+            mouseLog(e);
+        });
+        
+        bdy.mousemove(function (e) {
+            mouseLog(e);
+        });
+    });
 })(jQuery, fluid);
