@@ -145,7 +145,12 @@ var jqUnit = jqUnit || {};
                 attr = jQuery.trim(fluid.dom.getElementText(node));
             }
             else if (key === "nodeHTML") {
-                attr = $(node).html();
+                attr = jQuery(node).html();
+            }
+            else if (key === "hasClass") {
+                var toCheck = expected.hasClass;
+                var jqNode = jQuery(node);
+                attr = jqNode.hasClass(toCheck) ? toCheck : jqNode.attr("class");
             }
             var evalue = expected[key];
             var pass = evalue === attr;
