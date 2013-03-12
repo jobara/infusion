@@ -136,7 +136,10 @@ var jqUnit = jqUnit || {};
         for (var key in expected) {
             // mustn't use DOM getAttribute because of numerous bugs (in particular http://www.quirksmode.org/bugreports/archives/2007/03/getAttributefor_is_always_null_in_Internet_Explore.html )
             var attr = jQuery.attr(node, key);
+            var evalue = expected[key];
             var messageExt = " - attribute " + key + "";
+            
+            // setup special cases
             if (key === "nodeName") {
                 attr = node.tagName.toLowerCase();
                 messageExt = " - node name";
@@ -148,16 +151,21 @@ var jqUnit = jqUnit || {};
                 attr = jQuery(node).html();
             }
             else if (key === "hasClass") {
-                var toCheck = expected.hasClass;
-                var jqNode = jQuery(node);
-                attr = jqNode.hasClass(toCheck) ? toCheck : jqNode.attr("class");
+                var toCheck = fluid.makeArray(expected.hasClass);
+                attr = fluid.arrayToHash(toCheck);
+                
+                evalue = jQuery(node).prop('className').split(' ');
             }
-            var evalue = expected[key];
-            var pass = evalue === attr;
-            if (attr === false || attr === true) { // support for IE refusing to honour XHTML values
-                pass = !!evalue === attr;
+            
+            // assertions
+            if (key === "hasClass") {
+                jqUnit.assertRightHand(message + messageExt, attr, evalue);
             }
-            if (key !== "children") {
+            else if (key !== "children") {
+                var pass = evalue === attr;
+                if (attr === false || attr === true) { // support for IE refusing to honour XHTML values
+                    pass = !!evalue === attr;
+                }
                 jqUnit.assertTrue(message + messageExt + " expected value: " + evalue + " actual: " + attr, pass);
             }
             else {
