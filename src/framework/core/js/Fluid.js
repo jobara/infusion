@@ -35,7 +35,7 @@ var fluid = fluid || fluid_1_5;
 (function ($, fluid) {
 
     fluid.version = "Infusion 1.5";
-    fluid.testValue = "Update 1";
+    fluid.testValue = "Update 2";
 
     // Export this for use in environments like node.js, where it is useful for
     // configuring stack trace behaviour
