@@ -2,10 +2,22 @@
 <html>
     <head>
         <title>Test github hosted Page</title>
+
+        <script type="text/javascript" src="./infusion-src/src/lib/jquery/core/js/jquery.js"></script>
+        <script type="text/javascript" src="./infusion-src/src/framework/core/js/Fluid.js"></script>
     </head>
     <body>
         <h1>Hello World!</h1>
-        <a href="infusion/src/demos/">Demo Portal</a>
+        <a href="./infusion-src/src/demos/">Demo Portal</a>
+
+        <h2>Test value to ensure that the submodule is updated from the branch automatically</h2>
+        <p class="test-value">Javascript Not working</p>
+
+        <script>
+            $("document").ready(function () {
+                $(".test-value").text(fluid.testValue);
+            });
+        </script>
     </body>
 
 </html>
