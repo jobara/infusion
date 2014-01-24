@@ -1,4 +1,0 @@
-[submodule "infusion-src"]
-	path = infusion-src
-	url = git@github.com:jobara/infusion.git
-    branch = test-src
