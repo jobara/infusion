@@ -1,0 +1,3 @@
+[submodule "infusion"]
+	path = infusion
+	url = git@github.com:jobara/infusion.git
