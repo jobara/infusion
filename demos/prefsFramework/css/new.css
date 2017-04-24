@@ -774,6 +774,7 @@ body {
     border-bottom:0.06rem solid #acacac;
     padding-bottom: 0.13rem;
     margin-top: 3.13rem;
+    height: 2.5rem;
 }
 .panelizer-view-mode.node-full.node-resource-collection .header-row .pane-node-field-focus-area,
 .panelizer-view-mode.node-full.node-resource-collection .header-row .pane-node-field-category {
