@@ -775,12 +775,12 @@ body {
         width: 100% !important;
         padding-right: 0;
     }
-}
-@media only screen and (max-width: 56.25em) {
+
     .panelizer-view-mode.node-full.node-resource-collection .panels-flexible-region-last.sidebar-region {
         display: none;
     }
 }
+
 .panelizer-view-mode.node-full.node-resource-collection .header-row .pane-node-field-focus-area .field-item {
     text-transform: capitalize;
 }
@@ -922,14 +922,40 @@ body {
     border-bottom: none;
     padding-bottom: 0;
 }
-.panelizer-view-mode.node-full.node-resource-collection .pane-related-resource-collections h2.pane-title {
+
+.pane-node-field-related-links-sidebar-list ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+@media only screen and (max-width: 56.25em) {
+    .pane-node-field-related-links-sidebar-list ul:first-child {
+        padding-top: 3rem;
+    }
+}
+
+.pane-node-field-related-links > li {
+    padding: 1.56rem 0;
+}
+
+.pane-node-field-related-links:last-child {
+    padding-bottom: 3rem;
+}
+
+.pane-node-field-related-links > li:not(:last-child) {
+    border-bottom: 0.06rem solid #e0e0e0
+}
+
+.pane-node-field-related-links-sidebar-list li h3,
+.panelizer-view-mode.node-full.node-resource-collection .pane-related-resource-collections h3.pane-title {
     text-transform: uppercase;
     font-weight: 600;
     letter-spacing: 0.13rem;
     font-size: 1.3rem;
     color: #333333;
 }
-.panelizer-view-mode.node-full.node-resource-collection .pane-related-resource-collections h2.pane-title:after {
+.panelizer-view-mode.node-full.node-resource-collection .pane-related-resource-collections h3.pane-title:after {
     content: '//';
 }
 .panelizer-view-mode.node-full.node-resource-collection .pane-related-resource-collections .view-related-resource-collections {
@@ -939,7 +965,7 @@ body {
     padding-bottom: 1.56rem;
     padding-top: 1.56rem;
 }
-.panelizer-view-mode.node-full.node-resource-collection .pane-related-resource-collections .view-related-resource-collections .views-row h2 a.right-angle-after {
+.panelizer-view-mode.node-full.node-resource-collection .pane-related-resource-collections .view-related-resource-collections .views-row h4 a.right-angle-after {
     font-weight: 600;
     color: #333333;
 }
