@@ -320,7 +320,7 @@ body {
 #navigation-main #block-menu_block-1 li {
     display: block;
     float: right;
-    width: 16.25rem;
+    width: 17.5rem;
     margin: 0;
     padding: 0;
 }
@@ -479,7 +479,7 @@ body {
 }
 #navigation-main #block-boxes-digitalsearch_menu {
     float: right;
-    width: 16.25rem;
+    width: 17.5rem;
     margin-top: 0.94rem;
     margin-bottom: 0.94rem;
 }
@@ -996,11 +996,11 @@ body {
 }
 
 #navigation-main.demo-sideMenu-open {
-    width: 16.25rem;
+    width: 17.5rem;
 }
 
 #navigation-main.demo-sideMenu-open + #page {
-    left: 16.25rem;
+    left: 17.5rem;
 }
 
 .demo-menuToggle {
