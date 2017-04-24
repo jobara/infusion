@@ -6,34 +6,29 @@ a {
 }
 h1 {
     color: #0a4595;
-    line-height: 0.92188;
     font-size: 6.4rem;
     letter-spacing: -0.13rem;
     font-weight: 600;
 }
 @media only screen and (max-width: 56.25em) {
     h1 {;
-        line-height: 0.87755;
         font-size: 4.9rem;
         letter-spacing: normal;
     }
 }
 @media only screen and (max-width: 30em) {
     h1 {
-        line-height: 1.10204;
         font-size: 4.9rem;
         letter-spacing: normal;
     }
 }
 h2 {
     color: #0a4595;
-    line-height: 1;
     font-size: 4.8rem;
     font-weight: bold;
 }
 @media only screen and (max-width: 56.25em) {
     h2 {
-        line-height: 0.90909;
         font-size: 3.3rem;
         font-weight: 600;
     }
@@ -41,26 +36,22 @@ h2 {
 .panelizer-view-mode.node-full.node-resource-collection .content-row .field-name-field-paragraphs-body .paragraphs-item.paragraphs-bundle-feature-block .field-name-field-featureblock-title,
 .panelizer-view-mode.node-full.node-resource-collection .title-row .field-name-field-subtitle {
     color: #333333;
-    line-height: 1.39286;
     font-size: 2.8rem;
     font-weight: bold;
 }
 @media only screen and (max-width: 56.25em) {
     .panelizer-view-mode.node-full.node-resource-collection .content-row .field-name-field-paragraphs-body .paragraphs-item.paragraphs-bundle-feature-block .field-name-field-featureblock-title,
     .panelizer-view-mode.node-full.node-resource-collection .title-row .field-name-field-subtitle {
-        line-height: 1.36364;
         font-size: 2.2rem;
     }
 }
 .panelizer-view-mode.node-full.node-resource-collection .pane-node-field-related-links-sidebar-list .field-name-field-title {
     color: #333333;
-    line-height: 1.5;
     font-size: 2.4rem;
     font-weight: bold;
 }
 @media only screen and (max-width: 56.25em) {
     .panelizer-view-mode.node-full.node-resource-collection .pane-node-field-related-links-sidebar-list .field-name-field-title {
-        line-height: 1.33333;
         font-size: 1.8rem;
     }
 }
@@ -68,12 +59,10 @@ h5 {
     letter-spacing: 0.38rem;
     color: #0099d8;
     font-weight: bold;
-    line-height: 1.375;
     font-size: 1.6rem;
 }
 @media only screen and (max-width: 56.25em) {
     h5 {
-        line-height: 1.42857;
         font-size: 1.4rem;
     }
 }
@@ -91,13 +80,11 @@ ul {
     color: #333333;
 }
 ul li {
-    line-height: 1.5;
     font-size: 1.6rem;
     margin-bottom: 0.63rem;
 }
 @media only screen and (max-width: 56.25em) {
     ul li {
-        line-height: 1.375;
         font-size: 1.6rem;
     }
 }
@@ -163,7 +150,6 @@ input {
 }
 body {
     margin: 0;
-    line-height: 1.5;
     font-size: 1.3rem;
     font-family: "Helvetica Neue", helvetica, Arial, sans-serif;
     letter-spacing: 0.03em;
@@ -191,7 +177,6 @@ input {
 }
 button,
 input {
-    line-height: normal;
 }
 button,
 input[type="submit"] {
@@ -347,7 +332,6 @@ body {
 #navigation-main #block-menu_block-1 li a {
     height: auto;
     display: block;
-    line-height: 1.15789;
     font-size: 1.9rem;
     font-weight: 300;
     color: #fff;
@@ -364,7 +348,6 @@ body {
         padding-top: 0.94rem;
         padding-bottom: 0.94rem;
         font-size: 0.94rem;
-        line-height: 1.53333;
         font-size: 1.5rem;
     }
 }
@@ -373,7 +356,6 @@ body {
         padding-top: 0.75rem;
         padding-bottom: 0.75rem;
         font-size: 0.94rem;
-        line-height: 1.53333;
         font-size: 1.5rem;
     }
 }
@@ -382,14 +364,12 @@ body {
         padding-top: 0.75rem;
         padding-bottom: 0.75rem;
         font-size: 0.94rem;
-        line-height: 1.53333;
         font-size: 1.5rem;
     }
 }
 @media only screen and (max-width: 30em) {
     #navigation-main #block-menu_block-1 li a {
         font-size: 0.75rem;
-        line-height: 1.33333;
         font-size: 1.2rem;
         font-weight: 500;
     }
@@ -467,14 +447,12 @@ body {
 .mobile-menu-button {
     cursor: pointer;
     display: inline-block;
-    line-height: 1.25;
     font-size: 2.4rem;
     color: #0099D8;
     height: 1.88rem;
 }
 @media only screen and (max-width: 30em) {
     .mobile-menu-button {
-        line-height: 2.14286;
         font-size: 1.4rem;
     }
 }
@@ -555,7 +533,6 @@ body {
 #block-boxes-digitalsearch input[type="text"],
 #block-boxes-digitalsearch_menu input[type="text"] {
     border: none;
-    line-height: 1.15789;
     font-size: 1.9rem;
     color: #fff;
     font-weight: 100;
@@ -596,7 +573,6 @@ body {
 .not-front header #block-boxes-digitalsearch input[type="text"] {
     border-bottom:0.06rem solid #0a4595;
     color: #0a4595;
-    line-height: 1.22222;
     font-size: 1.8rem;
     font-weight: 500;
 }
@@ -623,7 +599,6 @@ body {
     opacity: 1;
 }
 body {
-    line-height: 1.5;
     font-size: 2rem;
 }
 #header {
@@ -653,12 +628,10 @@ body {
     }
 }
 .field-name-field-intro {
-    line-height: 1.38462;
     font-size: 2.6rem;
 }
 @media only screen and (max-width: 56.25em) {
     .field-name-field-intro {
-        line-height: 1.4;
         font-size: 2rem;
     }
 }
@@ -713,11 +686,9 @@ body {
 }
 #boxes-box-header_logo a.site-name {
     padding-top: 0.63rem;
-    line-height: 1.10526;
     font-size: 1.9rem;
 }
 #boxes-box-header_logo a.site-slogan {
-    line-height: 1.90909;
     font-size: 1.1rem;
     color: #000;
 }
@@ -774,11 +745,11 @@ body {
     border-bottom:0.06rem solid #acacac;
     padding-bottom: 0.13rem;
     margin-top: 3.13rem;
+    line-height: normal;
     height: 2.5rem;
 }
 .panelizer-view-mode.node-full.node-resource-collection .header-row .pane-node-field-focus-area,
 .panelizer-view-mode.node-full.node-resource-collection .header-row .pane-node-field-category {
-    line-height: 1;
     font-size: 1.6rem;
     font-weight: 600;
     float: left;
@@ -880,17 +851,14 @@ body {
     margin-bottom: 0;
 }
 .panelizer-view-mode.node-full.node-resource-collection .content-row .field-name-field-paragraphs-body .paragraphs-item.paragraphs-bundle-feature-block .field-name-field-featureblock-title {
-    line-height: 1.36;
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 1.25rem;
 }
 .panelizer-view-mode.node-full.node-resource-collection .content-row .field-name-field-paragraphs-body .paragraphs-item.paragraphs-bundle-feature-block .field-name-field-featureblock-teaser {
-    line-height: 1.5;
     font-size: 1.6rem;
 }
 .panelizer-view-mode.node-full.node-resource-collection .content-row .field-name-field-paragraphs-body .paragraphs-item.paragraphs-bundle-feature-block .paragraphs-items-field-featureblock-link a {
-    line-height: 1.5;
     font-size: 1.6rem;
     color: #000;
     font-weight: 600;
@@ -921,11 +889,9 @@ body {
     margin: 0;
     padding-bottom: 1.25rem;
     padding-top: 1.25rem;
-    line-height: 1.11111;
     font-size: 1.8rem;
 }
 .panelizer-view-mode.node-full.node-resource-collection .pane-related-resource-collections .view-related-resource-collections .views-row h2 {
-    line-height: 1.11111;
     font-size: 1.8rem;
     font-weight: normal;
 }
@@ -960,7 +926,6 @@ body {
     text-transform: uppercase;
     font-weight: 600;
     letter-spacing: 0.13rem;
-    line-height: 1.5;
     font-size: 1.3rem;
     color: #333333;
 }
@@ -982,7 +947,6 @@ body {
     margin-bottom: 3.44rem;
 }
 .panelizer-view-mode.node-full.node-resource-collection .pane-node-field-related-links-sidebar-list .field-name-field-title {
-    line-height: 1;
     font-size: 1.6rem;
 }
 @media only screen and (max-width: 56.25em) {
