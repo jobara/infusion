@@ -1,0 +1,6 @@
+{
+    "label": "Syllabification",
+    "description": "Split words into their syllables",
+    "switchOn": "ON",
+    "switchOff": "OFF"
+}
