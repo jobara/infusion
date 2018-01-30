@@ -31,10 +31,31 @@
 
     <body>
         <section>
+            <h1>Comparison of Syllabification Algorithms</h1>
+            <p>
+                The <a href="https://simple.wiktionary.org/wiki/Wiktionary:Most_frequent_1000_words_in_English">top 1000 words in English</a> (minus "square" and "closes"),
+                were used to construct a table comparing the <a href="https://github.com/nlp-compromise/nlp-syllables">nlp-syllables</a> and
+                <a href="https://github.com/bramstein/hypher">hypher</a> tools for separating words into their syllables. In correct syllabifications are flagged with a red
+                background. And the summary above the table indicates the accuracy (correct syllabifcations / count  * 100);
+
+                <dl>
+                    <dt>word</dt>
+                    <dd>The word to be separated into its syllables</dd>
+                    <dt>dictionary</dt>
+                    <dd>The syllabified form of the word as sorced from <a href="https://www.google.ca/search?q=Dictionary">Google Define (Oxford American Dictionary)</a> and <a href="https://www.merriam-webster.com">Merriam-Webster</a></dd>
+                    <dt>nlp-syllables</dt>
+                    <dd>The syllabification result from the nlp-syllables tool</dd>
+                    <dt>hypher</dt>
+                    <dd>The syllabification result from the hypher tool</dd>
+                </dl>
+            </p>
+            <h2>Results</h2>
+            <h3>Summary</h3>
             <ul>
-                <li>nlp-syllables: <span class="nlp-summary"></span></li>
-                <li>hypher: <span class="hypher-summary"></span></li>
+                <li><strong>nlp-syllables</strong>: <span class="nlp-summary"></span></li>
+                <li><strong>hypher</strong>: <span class="hypher-summary"></span></li>
             </ul>
+            <h3>Comparison</h3>
             <table>
                 <thead>
                     <tr>

@@ -4,12 +4,16 @@ body {
     display: flex;
 }
 
-ul {
+section {
+
+    margin: 0 auto;
     margin-top: 5rem;
+    width: 75%;
+    max-width: 55rem;
 }
 
-section {
-    margin: 0 auto;
+table {
+    font-size: 1.5rem;
 }
 
 td, th {
