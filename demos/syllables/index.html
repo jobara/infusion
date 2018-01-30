@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <link rel="stylesheet" type="text/css" href="../../src/lib/normalize/css/normalize.css" />
+        <link rel="stylesheet" type="text/css" href="../lib/foundation/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="../../src/framework/core/css/fluid.css" />
+        <link rel="stylesheet" type="text/css" href="css/syllable.css" />
+
+        <script type="text/javascript" src="../../src/lib/jquery/core/js/jquery.js"></script>
+        <script type="text/javascript" src="../../src/lib/jquery/ui/js/jquery-ui.js"></script>
+        <script type="text/javascript" src="../../src/framework/core/js/jquery.keyboard-a11y.js"></script>
+        <script type="text/javascript" src="../../src/framework/core/js/Fluid.js"></script>
+        <script type="text/javascript" src="../../src/framework/core/js/FluidDocument.js"></script>
+        <script type="text/javascript" src="../../src/framework/core/js/FluidIoC.js"></script>
+        <script type="text/javascript" src="../../src/framework/core/js/DataBinding.js"></script>
+        <script type="text/javascript" src="../../src/framework/core/js/FluidView.js"></script>
+
+        <!-- NLP Compromise -->
+        <script type="text/javascript" src="../../src/lib/compromise/js/nlp_compromise.js"></script>
+        <script type="text/javascript" src="../../src/lib/compromise/js/nlp-syllables.js"></script>
+
+        <!-- Hypher -->
+        <script type="text/javascript" src="../../src/lib/hypher/core/js/jquery.hypher.js"></script>
+        <script type="text/javascript" src="../../src/lib/hypher/patterns/js/en-us.js"></script>
+
+        <script type="text/javascript" src="js/syllable.js"></script>
+
+        <title>Syllable Test</title>
+    </head>
+
+    <body>
+        <section>
+            <ul>
+                <li>nlp-syllables: <span class="nlp-summary"></span></li>
+                <li>hypher: <span class="hypher-summary"></span></li>
+            </ul>
+            <table>
+                <thead>
+                    <tr>
+                        <th>word</th>
+                        <th>dictionary</th>
+                        <th>nlp-syllables</th>
+                        <th>hypher</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </section>
+        <script>
+            demo.syllables("section");
+        </script>
+    </body>
+</html>

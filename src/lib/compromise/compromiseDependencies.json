@@ -1,0 +1,10 @@
+{
+    "compromise": {
+        "name": "Compromise",
+        "description": "Natural language processing on the client side.",
+        "files": [
+            "./js/nlp-compromise.js",
+            "./js/nlp-syllables.js"
+        ]
+    }
+}

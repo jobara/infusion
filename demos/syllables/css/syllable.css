@@ -1,0 +1,33 @@
+/* Themed Appearance + Themed States */
+
+body {
+    display: flex;
+}
+
+ul {
+    margin-top: 5rem;
+}
+
+section {
+    margin: 0 auto;
+}
+
+td, th {
+    padding: 0.2rem;
+}
+
+tr {
+    border: 1px solid black;
+}
+
+tr:nth-child(even) {
+    background: #CCC;
+}
+
+.red {
+    background-color: red;
+}
+
+/* .green {
+    background-color: green;
+} */
