@@ -9,7 +9,7 @@ You may obtain a copy of the ECL 2.0 License and BSD License at
 https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
 */
 
-/* global fluid, nlp_compromise, nlpSyllables, Hypher */
+/* global fluid, nlp_compromise, nlpSyllables, Hypher, Hyphenator */
 
 var demo = demo || {};
 (function ($, fluid) {
@@ -20,10 +20,12 @@ var demo = demo || {};
         selectors: {
             tbody: "tbody",
             nlpSum: ".nlp-summary",
-            hypherSum: ".hypher-summary"
+            hypherSum: ".hypher-summary",
+            hyphenatorSum: ".hyphenator-summary",
+            hyphenate: ".hyphenate"
         },
         markup: {
-            tr: "<tr><td>%word</td><td>%dictionary</td><td class=\"%nlpColour\">%nlp-syllables</td><td class=\"%hypherColour\">%hypher</td></tr>"
+            tr: "<tr><td>%word</td><td class=\"dictionary\">%dictionary</td><td class=\"%nlpColour\">%nlp-syllables</td><td class=\"%hypherColour\">%hypher</td><td class=\"hyphenate\">%word</td></tr>"
         },
         events: {
             onWordsLoaded: null
@@ -57,8 +59,38 @@ var demo = demo || {};
         return syllables.join("·");
     };
 
+    demo.syllables.hyphenator = function (that) {
+        Hyphenator.config({
+            hyphenchar : "·",
+            classname: "hyphenate",
+            minwordlength: 3,
+            displaytogglebox: true,
+            onhyphenationdonecallback: function () {
+                var hyphenated = that.locate("hyphenate");
+                var hyphenatorAccuracy = 0;
+                hyphenated.each(function (idx, elm) {
+                    elm = $(elm);
+                    var hyphenatedText = elm.text();
+                    var dictionaryText = elm.siblings().filter(".dictionary").text();
+
+                    if (dictionaryText.indexOf(hyphenatedText) >= 0) {
+                        hyphenatorAccuracy++;
+                    } else {
+                        elm.addClass("red");
+                    }
+                });
+                that.locate("hyphenatorSum").text(demo.syllables.accuracy(hyphenatorAccuracy, hyphenated.length));
+            }
+        });
+        Hyphenator.run();
+    };
+
     demo.syllables.isCorrect = function (correct, test) {
         return correct.includes(test);
+    };
+
+    demo.syllables.accuracy = function (accurate, total) {
+        return fluid.roundToDecimal((accurate / total * 100), 2) + "%";
     };
 
     demo.syllables.renderWords = function (that, words) {
@@ -97,9 +129,10 @@ var demo = demo || {};
             tbody.append(template);
         });
 
-        console.log("TESTING");
-        nlpSum.text(fluid.roundToDecimal((nlpAccuracy / count * 100), 2) + "%" );
-        hypherSum.text(fluid.roundToDecimal((hypherAccuracy / count * 100), 2) + "%" );
+        nlpSum.text(demo.syllables.accuracy(nlpAccuracy, count));
+        hypherSum.text(demo.syllables.accuracy(hypherAccuracy, count));
+
+        demo.syllables.hyphenator(that);
     };
 
 })(jQuery, fluid);
