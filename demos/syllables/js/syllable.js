@@ -9,7 +9,7 @@ You may obtain a copy of the ECL 2.0 License and BSD License at
 https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
 */
 
-/* global fluid, nlp_compromise, nlpSyllables, Hypher, Hyphenator */
+/* global fluid, nlp_compromise, nlpSyllables, Hypher, Hyphenator, createHyphenator, hyphenationPatternsEnUs */
 
 var demo = demo || {};
 (function ($, fluid) {
@@ -22,10 +22,11 @@ var demo = demo || {};
             nlpSum: ".nlp-summary",
             hypherSum: ".hypher-summary",
             hyphenatorSum: ".hyphenator-summary",
+            hyphenSum: ".hy-phen-summary",
             hyphenate: ".hyphenate"
         },
         markup: {
-            tr: "<tr><td>%word</td><td class=\"dictionary\">%dictionary</td><td class=\"%nlpColour\">%nlp-syllables</td><td class=\"%hypherColour\">%hypher</td><td class=\"hyphenate\">%word</td></tr>"
+            tr: "<tr><td>%word</td><td class=\"dictionary\">%dictionary</td><td class=\"%nlpColour\">%nlp-syllables</td><td class=\"%hypherColour\">%hypher</td><td class=\"hyphenate\">%word</td><td class=\"%hyphenColour\">%hyphen</td></tr>"
         },
         events: {
             onWordsLoaded: null
@@ -57,6 +58,11 @@ var demo = demo || {};
     demo.syllables.hypher = function (word) {
         var syllables = Hypher.languages.en.hyphenate(word);
         return syllables.join("·");
+    };
+
+    demo.syllables.hyphen = function (word) {
+        var hyphenate = createHyphenator(hyphenationPatternsEnUs, {hyphenChar: "·"});
+        return hyphenate(word);
     };
 
     demo.syllables.hyphenator = function (that) {
@@ -97,9 +103,11 @@ var demo = demo || {};
         var tbody = that.locate("tbody");
         var nlpSum = that.locate("nlpSum");
         var hypherSum = that.locate("hypherSum");
+        var hyphenSum = that.locate("hyphenSum");
         var count = 0;
         var nlpAccuracy = 0;
         var hypherAccuracy = 0;
+        var hyphenAccuracy = 0;
 
         fluid.each(words, function (syllables, word) {
             count++;
@@ -108,7 +116,8 @@ var demo = demo || {};
                 word: word,
                 dictionary: syllables.join(", "),
                 "nlp-syllables": demo.syllables.nlpSyllables(word),
-                hypher: demo.syllables.hypher(word)
+                hypher: demo.syllables.hypher(word),
+                hyphen: demo.syllables.hyphen(word)
             };
 
             if (demo.syllables.isCorrect(syllables, tokens["nlp-syllables"])) {
@@ -125,12 +134,20 @@ var demo = demo || {};
                 tokens.hypherColour = "red";
             }
 
+            if (demo.syllables.isCorrect(syllables, tokens.hyphen)) {
+                hyphenAccuracy++;
+                tokens.hyphenColour = "green";
+            } else {
+                tokens.hyphenColour = "red";
+            }
+
             var template = fluid.stringTemplate(that.options.markup.tr, tokens);
             tbody.append(template);
         });
 
         nlpSum.text(demo.syllables.accuracy(nlpAccuracy, count));
         hypherSum.text(demo.syllables.accuracy(hypherAccuracy, count));
+        hyphenSum.text(demo.syllables.accuracy(hyphenAccuracy, count));
 
         demo.syllables.hyphenator(that);
     };
