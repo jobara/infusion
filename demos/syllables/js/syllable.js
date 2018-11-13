@@ -18,11 +18,15 @@ var demo = demo || {};
     fluid.defaults("demo.syllables", {
         gradeNames: ["fluid.viewComponent"],
         selectors: {
-            tbody: "tbody",
+            tbody: ".comparison tbody",
             nlpSum: ".nlp-summary",
+            nlpTime: ".nlp-time",
             hypherSum: ".hypher-summary",
+            hypherTime: ".hypher-time",
             hyphenatorSum: ".hyphenator-summary",
+            hyphenatorTime: ".hyphenator-time",
             hyphenSum: ".hy-phen-summary",
+            hyphenTime: ".hy-phen-time",
             hyphenate: ".hyphenate"
         },
         markup: {
@@ -48,8 +52,9 @@ var demo = demo || {};
         }
     });
 
+    nlp_compromise.plugin(nlpSyllables);
+
     demo.syllables.nlpSyllables = function (word) {
-        nlp_compromise.plugin(nlpSyllables);
         var text = nlp_compromise.text(word);
         var syllables = text.syllables();
         return syllables[0][0].join("·");
@@ -60,12 +65,13 @@ var demo = demo || {};
         return syllables.join("·");
     };
 
+    demo.hyphenate = createHyphenator(hyphenationPatternsEnUs, {hyphenChar: "·"});
     demo.syllables.hyphen = function (word) {
-        var hyphenate = createHyphenator(hyphenationPatternsEnUs, {hyphenChar: "·"});
-        return hyphenate(word);
+        return demo.hyphenate(word);
     };
 
     demo.syllables.hyphenator = function (that) {
+        var startTime = Date.now();
         Hyphenator.config({
             hyphenchar : "·",
             classname: "hyphenate",
@@ -86,6 +92,7 @@ var demo = demo || {};
                     }
                 });
                 that.locate("hyphenatorSum").text(demo.syllables.accuracy(hyphenatorAccuracy, hyphenated.length));
+                that.locate("hyphenatorTime").text((Date.now() - startTime) + "ms");
             }
         });
         Hyphenator.run();
@@ -102,23 +109,41 @@ var demo = demo || {};
     demo.syllables.renderWords = function (that, words) {
         var tbody = that.locate("tbody");
         var nlpSum = that.locate("nlpSum");
+        var nlpTime = that.locate("nlpTime");
         var hypherSum = that.locate("hypherSum");
+        var hypherTime = that.locate("hypherTime");
         var hyphenSum = that.locate("hyphenSum");
+        var hyphenTime = that.locate("hyphenTime");
         var count = 0;
         var nlpAccuracy = 0;
+        var nlpDuration = 0;
         var hypherAccuracy = 0;
+        var hypherDuration = 0;
         var hyphenAccuracy = 0;
+        var hyphenDuration = 0;
 
         fluid.each(words, function (syllables, word) {
             count++;
             syllables = fluid.makeArray(syllables);
             var tokens = {
                 word: word,
-                dictionary: syllables.join(", "),
-                "nlp-syllables": demo.syllables.nlpSyllables(word),
-                hypher: demo.syllables.hypher(word),
-                hyphen: demo.syllables.hyphen(word)
+                dictionary: syllables.join(", ")
             };
+
+            // nlp-syllables
+            var startTime = Date.now();
+            tokens["nlp-syllables"] = demo.syllables.nlpSyllables(word);
+            nlpDuration += (Date.now() - startTime);
+
+            // hypher
+            startTime = Date.now();
+            tokens.hypher = demo.syllables.hypher(word);
+            hypherDuration += (Date.now() - startTime);
+
+            // hyphen
+            startTime = Date.now();
+            tokens.hyphen = demo.syllables.hyphen(word);
+            hyphenDuration += (Date.now() - startTime);
 
             if (demo.syllables.isCorrect(syllables, tokens["nlp-syllables"])) {
                 nlpAccuracy++;
@@ -146,8 +171,11 @@ var demo = demo || {};
         });
 
         nlpSum.text(demo.syllables.accuracy(nlpAccuracy, count));
+        nlpTime.text(nlpDuration + "ms");
         hypherSum.text(demo.syllables.accuracy(hypherAccuracy, count));
+        hypherTime.text(hypherDuration + "ms");
         hyphenSum.text(demo.syllables.accuracy(hyphenAccuracy, count));
+        hyphenTime.text(hyphenDuration + "ms");
 
         demo.syllables.hyphenator(that);
     };
