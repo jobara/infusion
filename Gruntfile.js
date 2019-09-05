@@ -145,16 +145,6 @@ module.exports = function (grunt) {
         processVerifyFilesReport(report);
     };
 
-    var verifyFilesListCSSRenameFunc = function (dest, src) {
-        var replaced = dest + src.replace("styl", "css");
-        return replaced;
-    };
-
-    var verifyFilesListMinifiedCSSRenameFunc = function (dest, src) {
-        var replaced = dest + src.replace("styl", "min.css");
-        return replaced;
-    };
-
     /** verifyFilesListFunc for building a file list of all expected distribution .js and .map files
      * @return {Array} expectedFileNames - the array of expected file names (strings)
      */
@@ -167,6 +157,21 @@ module.exports = function (grunt) {
             return [distDirectory + jsFilename, distDirectory + mapFilename];
         }));
         return expectedFilenames;
+    };
+
+    /**
+     * Used for rebasing URL references to the lib directory. In the assets directory the lib directory is adjacent
+     * to the other resources. In particular for CSS files, we need to rebase the reference to things like fonts and
+     * images. This usually isn't a problem for other locations because the CSS files are stored adjacent to the
+     * resources they access, unless they are stored in the lib directory.
+     *
+     * The function will replace two or more occurences of "../" found in front of "lib" with "../lib".
+     *
+     * @param  {String} content - the content of a file that will have URLs rebased.
+     * @return {String}         - the rebased content of the file.
+     */
+    var rebaseLibReferences = function (content) {
+        return content.replace(/(..\/){2,}lib/g, "../lib");
     };
 
     // Project configuration.
@@ -182,7 +187,6 @@ module.exports = function (grunt) {
             build: "build",
             products: "products",
             stylus: ["src/components/switch/css/*.css", "src/framework/preferences/css/*.css"],
-            stylusDist: "dist/assets/**/stylus", // removes the empty stylus directory from the distribution
             ciArtifacts: ["*.tap"],
             dist: "dist",
             postBuild: {
@@ -252,12 +256,48 @@ module.exports = function (grunt) {
                     }
                 }]
             },
+            distRebasedAssets: {
+                options: {
+                    process: rebaseLibReferences
+                },
+                files: [{
+                    expand: true,
+                    flatten: true,
+                    filter: "isFile",
+                    src: ["src/components/**/css/*.css", "src/framework/**/css/*.css"],
+                    dest: "dist/assets/css/"
+                }]
+            },
             distAssets: {
                 files: [{
                     expand: true,
-                    cwd: "build/",
-                    src: ["src/framework/preferences/fonts/**", "src/framework/preferences/images/**", "src/lib/open-dyslexic/**", "src/lib/opensans/**"],
+                    flatten: true,
+                    filter: "isFile",
+                    src: ["src/components/**/fonts/*.woff", "src/framework/**/fonts/*.woff"],
+                    dest: "dist/assets/fonts/"
+                }, {
+                    expand: true,
+                    flatten: true,
+                    filter: "isFile",
+                    src: ["src/components/**/images/**", "src/framework/**/images/**"],
+                    dest: "dist/assets/images/"
+                }, {
+                    expand: true,
+                    cwd: "src/",
+                    src: ["lib/**"],
                     dest: "dist/assets/"
+                }, {
+                    expand: true,
+                    flatten: true,
+                    filter: "isFile",
+                    src: ["src/components/**/messages/*.json", "src/framework/**/messages/*.json"],
+                    dest: "dist/assets/messages/"
+                }, {
+                    expand: true,
+                    flatten: true,
+                    filter: "isFile",
+                    src: ["src/components/**/html/*.html", "src/framework/**/html/*.html"],
+                    dest: "dist/assets/templates/"
                 }]
             },
             dependencies: {
@@ -475,18 +515,6 @@ module.exports = function (grunt) {
                     src: ["src/**/css/stylus/*.styl"],
                     ext: ".css"
                 }]
-            },
-            dist: {
-                options: {
-                    compress: "<%= buildSettings.compress %>",
-                    relativeDest: ".."
-                },
-                files: [{
-                    expand: true,
-                    src: ["src/**/css/stylus/*.styl"],
-                    ext: "<% buildSettings.compress ? print('.min.css') : print('.css') %>",
-                    dest: "dist/assets/"
-                }]
             }
         },
         // grunt-contrib-watch task to watch and rebuild stylus files
@@ -569,55 +597,58 @@ module.exports = function (grunt) {
             fonts: {
                 files: [{
                     expand: true,
-                    src: ["*.woff"],
-                    cwd: "src/lib/opensans/fonts/",
-                    dest: "dist/assets/src/lib/opensans/fonts/"
-                }, {
-                    expand: true,
-                    src: ["*.woff"],
-                    cwd: "src/lib/open-dyslexic/fonts/",
-                    dest: "dist/assets/src/lib/open-dyslexic/fonts/"
-                }, {
-                    expand: true,
-                    src: ["*.woff"],
-                    cwd: "src/framework/preferences/fonts/",
-                    dest: "dist/assets/src/framework/preferences/fonts/"
+                    flatten: true,
+                    filter: "isFile",
+                    src: ["src/components/**/fonts/*.woff", "src/framework/**/fonts/*.woff"],
+                    dest: "dist/assets/fonts/"
                 }]
             },
             js: {
                 verifyFilesListFunc: verifyFilesListJSDistributions
             },
             css: {
-                files: [
-                    {
-                        expand: true,
-                        src: ["*.styl"],
-                        cwd: "src/framework/preferences/css/stylus/",
-                        dest: "dist/assets/src/framework/preferences/css/",
-                        rename: verifyFilesListCSSRenameFunc
-                    },
-                    {
-                        expand: true,
-                        src: ["*.styl"],
-                        cwd: "src/framework/preferences/css/stylus/",
-                        dest: "dist/assets/src/framework/preferences/css/",
-                        rename: verifyFilesListMinifiedCSSRenameFunc
-                    },
-                    {
-                        expand: true,
-                        src: ["*.styl"],
-                        cwd: "src/components/switch/css/stylus/",
-                        dest: "dist/assets/src/components/switch/css/",
-                        rename: verifyFilesListCSSRenameFunc
-                    },
-                    {
-                        expand: true,
-                        src: ["*.styl"],
-                        cwd: "src/components/switch/css/stylus/",
-                        dest: "dist/assets/src/components/switch/css/",
-                        rename: verifyFilesListMinifiedCSSRenameFunc
-                    }
-                ]
+                files: [{
+                    expand: true,
+                    flatten: true,
+                    filter: "isFile",
+                    src: ["src/components/**/css/*.css", "src/framework/**/css/*.css"],
+                    dest: "dist/assets/css/"
+                }]
+            },
+            images: {
+                files: [{
+                    expand: true,
+                    flatten: true,
+                    filter: "isFile",
+                    src: ["src/components/**/images/**", "src/framework/**/images/**"],
+                    dest: "dist/assets/images/"
+                }]
+            },
+            lib: {
+                files: [{
+                    expand: true,
+                    cwd: "src/",
+                    src: ["lib/**"],
+                    dest: "dist/assets/"
+                }]
+            },
+            messages: {
+                files: [{
+                    expand: true,
+                    flatten: true,
+                    filter: "isFile",
+                    src: ["src/components/**/messages/*.json", "src/framework/**/messages/*.json"],
+                    dest: "dist/assets/messages/"
+                }]
+            },
+            templates: {
+                files: [{
+                    expand: true,
+                    flatten: true,
+                    filter: "isFile",
+                    src: ["src/components/**/html/*.html", "src/framework/**/html/*.html"],
+                    dest: "dist/assets/templates/"
+                }]
             }
         }
     });
@@ -698,14 +729,12 @@ module.exports = function (grunt) {
         var concatTask = options.compress ? "uglify:" : "concat:";
         var tasks = [
             "cleanForDist",
-            "stylus:dist",
             "modulefiles:" + options.target,
             "pathMap:" + options.target,
             "copy:" + options.target,
             "copy:necessities",
             concatTask + options.target,
-            "copy:distJS",
-            "copy:distAssets"
+            "copy:distJS"
         ];
         grunt.task.run(tasks);
     });
@@ -715,10 +744,12 @@ module.exports = function (grunt) {
             "clean",
             "copy:dependencies",
             "lint",
+            "stylus",
             "distributions" + ( target ? ":" + target : "" ),
+            "copy:distAssets",
+            "copy:distRebasedAssets",
             "cleanForDist",
-            "verifyDistFiles",
-            "buildStylus" // put back stylus files needed for development
+            "verifyDistFiles"
         ];
         grunt.task.run(tasks);
     });
@@ -744,7 +775,7 @@ module.exports = function (grunt) {
         verifyFilesTaskFunc(message, expectedFiles);
     });
 
-    grunt.registerTask("cleanForDist", ["clean:build", "clean:products", "clean:stylusDist", "clean:ciArtifacts"]);
+    grunt.registerTask("cleanForDist", ["clean:build", "clean:products", "clean:ciArtifacts"]);
     grunt.registerTask("buildStylus", ["clean:stylus", "stylus:compile"]);
 
     grunt.registerTask("default", ["build:all"]);
