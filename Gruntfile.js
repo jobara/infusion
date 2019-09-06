@@ -284,7 +284,14 @@ module.exports = function (grunt) {
                 }, {
                     expand: true,
                     cwd: "src/",
-                    src: ["lib/**"],
+                    src: [
+                        "lib/hypher/patterns/**",
+                        "lib/jquery/ui/css/**/**",
+                        "lib/normalize/css/**",
+                        "lib/open-dyslexic/**",
+                        "lib/opensans/**",
+                        "lib/roboto/**"
+                    ],
                     dest: "dist/assets/"
                 }, {
                     expand: true,
@@ -628,7 +635,14 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     cwd: "src/",
-                    src: ["lib/**"],
+                    src: [
+                        "lib/hypher/patterns/**",
+                        "lib/jquery/ui/css/**/**",
+                        "lib/normalize/css/**",
+                        "lib/open-dyslexic/**",
+                        "lib/opensans/**",
+                        "lib/roboto/**"
+                    ],
                     dest: "dist/assets/"
                 }]
             },
@@ -770,7 +784,7 @@ module.exports = function (grunt) {
                 expectedFiles = this.data.verifyFilesListFunc();
             }
         } else {
-            grunt.log("Task target must either use standard Grunt 'file' options to produce a set of files to check or specify a 'verifyFilesListFunc' returning an array of file paths to check");
+            grunt.log.error("Task target must either use standard Grunt 'file' options to produce a set of files to check or specify a 'verifyFilesListFunc' returning an array of file paths to check");
         }
         verifyFilesTaskFunc(message, expectedFiles);
     });
