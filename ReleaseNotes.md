@@ -4,6 +4,20 @@
 
 [Infusion Documentation](https://github.com/fluid-project/infusion-docs)
 
+## What's New in 4.8.0
+
+* New features
+  * [FLUID-6783](https://issues.fluidproject.org/browse/FLUID-6783) Text highlight should be styled using
+  contrast themes
+* Resolves
+  * [FLUID-6782](https://issues.fluidproject.org/browse/FLUID-6782) Picking a contrast other than default
+    will change the background of the separate panel to white before the styling should be applied
+  * [FLUID-6772](https://issues.fluidproject.org/browse/FLUID-6772) Removal of UIO iframe in Infusion 4.5.0
+    causes overflow issue
+  * [FLUID-5098](https://issues.fluidproject.org/browse/FLUID-5098) TOC container is not well defined in demo
+  * [FLUID-6784](https://issues.fluidproject.org/browse/FLUID-6784) Upgrade to the latest versions of jQuery
+    and jQuery UI
+
 ## What's New in 4.7.1
 
 * Maintenance release which resolves
