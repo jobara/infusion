@@ -21,6 +21,30 @@ Infusion from v2.0.0 onwards adheres to [Semantic Versioning](https://semver.org
 
 ### More Info
 
+## [4.8.0] - 2025-01-15
+
+### Added
+
+* [FLUID-6783](https://issues.fluidproject.org/browse/FLUID-6783) Text highlight should be styled using
+  contrast themes
+
+### Fixed
+
+* [FLUID-6782](https://issues.fluidproject.org/browse/FLUID-6782) Picking a contrast other than default
+  will change the background of the separate panel to white before the styling should be applied
+* [FLUID-6772](https://issues.fluidproject.org/browse/FLUID-6772) Removal of UIO iframe in Infusion 4.5.0
+  causes overflow issue
+* [FLUID-5098](https://issues.fluidproject.org/browse/FLUID-5098) TOC container is not well defined in demo
+
+### Changed
+
+* [FLUID-6784](https://issues.fluidproject.org/browse/FLUID-6784) Upgrade to the latest versions of jQuery
+  and jQuery UI
+
+### More Info
+
+* [Changes in 4.8.0](https://github.com/fluid-project/infusion/compare/v4.7.1...v4.8.0)
+
 ## [4.7.1] - 2024-07-30
 
 ### Fixed
@@ -1039,7 +1063,8 @@ A pre-release of [0.3.0].
 * [Issues addressed in 0.1.0](https://issues.fluidproject.org/projects/FLUID/versions/10000)
 * [Changes in 0.1.0](https://github.com/fluid-project/infusion/commits/v0.1.0)
 
-[Unreleased]: https://github.com/fluid-project/infusion/compare/v4.7.1...HEAD
+[Unreleased]: https://github.com/fluid-project/infusion/compare/v4.8.0...HEAD
+[4.8.0]: https://github.com/fluid-project/infusion/releases/tag/v4.8.0
 [4.7.1]: https://github.com/fluid-project/infusion/releases/tag/v4.7.1
 [4.7.0]: https://github.com/fluid-project/infusion/releases/tag/v4.7.0
 [4.6.0]: https://github.com/fluid-project/infusion/releases/tag/v4.6.0
